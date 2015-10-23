@@ -24,6 +24,19 @@ class Item {
         self::$conn = $newConnection;
     }
 
+    static public function addItem($newName, $newPrice, $newDescription, $newQuantity){
+        $sql = "INSERT INTO items (item_name, item_price, item_description, item_quantity)
+                VALUES ('$newName', '$newPrice', '$newDescription', '$newQuantity')";
+
+        $result = self::$conn->query($sql);
+
+        if($result == true){
+            $newItem = new Item(self::$conn->insert_id, $newName, $newPrice, $newDescription, $newQuantity );
+            return $newItem;
+        }
+        return false;
+    }
+
     public function getItemById($id){
         $sql = "SELECT * FROM items WHERE item_name= {$id}";
         $return = self::$conn->query($sql);
