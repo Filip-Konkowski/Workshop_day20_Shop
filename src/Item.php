@@ -13,12 +13,33 @@ CREATE TABLE items(
 */
 class Item {
 
+    static private $conn;
+    public $id;
     public $name;
     public $price;
     public $description;
     public $quantity;
 
+    static public function setConnection (mysqli $newConnection) {
+        self::$conn = $newConnection;
+    }
 
+    public function getItemById($id){
+        $sql = "SELECT * FROM items WHERE item_name= {$id}";
+        $return = self::$conn->query($sql);
+        if($return == true){
+            if($return->row_nums == 1){
+                $row = $return->fetch_assoc();
+                $ItemById = new Item($row["item_id"], $row["item_name"], $row["item_price"], $row["item_description"], $row["item_quantity"]);
+                return $ItemById;
+            }
+        }
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getName()
     {
