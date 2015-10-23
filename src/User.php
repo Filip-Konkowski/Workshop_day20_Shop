@@ -7,6 +7,7 @@ CREATE TABLE users(
         user_email VARCHAR(30),
         user_password VARCHAR(60),
         PRIMARY KEY(user_id)
-        FOREIGN KEY(
-);
+        );
  */
+
+
