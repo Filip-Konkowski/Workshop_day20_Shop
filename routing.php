@@ -1,3 +1,3 @@
 <?php
 
-$router->map('GET', '/rejestracja/', 'register.php');
+$router->map("GET", "/register/", "register.php");
