@@ -1,7 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: filip
- * Date: 23.10.15
- * Time: 13:19
- */
+?>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Filip Konkowski and Daniel Waszkiewicz</p>
+    </div>
+</footer>
