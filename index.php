@@ -1,14 +1,13 @@
 <?php
 
 require_once __DIR__ . "/vendor/autoload.php";
-include ('config/db.php');
+include('config/db.php');
 
 $db = new mysqli(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DB);
 
-if($db->connect_error){
-    die('nieudane. blad:' .  $db->connect_error);
-}
-else{
+if ($db->connect_error) {
+    die('nieudane. blad:' . $db->connect_error);
+} else {
     echo 'polaczenie udane';
 }
 
@@ -42,4 +41,3 @@ require_once("footer.php");
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
-
