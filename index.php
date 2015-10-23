@@ -27,12 +27,14 @@ $match = $router->match()
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>E-shop</title>
-    <link href="css/css_bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= DIR_PATH ?>css/css_bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= DIR_PATH ?>css/custom.css" rel="stylesheet">
 </head>
 <body>
 <?php
 require_once("header.php");
 if ($match == true){
+    var_dump($match);
     require_once ($match["target"]);
 }
 require_once("footer.php");
