@@ -1,19 +1,38 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Please register</h1>
-            <div class="account-wall">
-                <form class="form-signin" action="register.php" method="POST" >
-                    <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
-                    <input type="password" class="form-control" name="password1" placeholder="Password" required>
-                    <input type="password" class="form-control" name="password2" placeholder="Repeat password" required>
-                    <input type="text" class="form-control" name="name" placeholder="Name" required>
-                    <input type="text" class="form-control" name="surname" placeholder="Surname" required>
-                    <input type="text" class="form-control" name="address" placeholder="Address" required><br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" value="register">Register</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<?php
+session_start();
+require_once('src/User.php');
+require __DIR__. '/config/db.php';
 
+/*
+$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DB);
+if ($db->connect_error) {
+    die('nieudane. blad:' . $db->connect_error);
+} else {
+    echo 'polaczenie udane do register';
+}
+*/
+if($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["email"]) && strlen(trim($_POST["email"])) > 1 && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+        $email = trim($_POST["email"]);
+    }
+    else {
+        $error["email"] = true;
+    }
+    if(count($error) == 0) {
+        User::setConnection($db);
+        $newUser = User::register($_POST["name"], $_POST["surname"], $_POST["email"], $_POST['password1'], $_POST["password2"], $_POST["address"]);
+        if ($newUser != false) {
+            $_SESSION["user"] = $newUser;
+            $result["success"] = ("Successful register");
+        } else {
+            $result["error"] = ("Problem with register");
+        }
+    }
+}
+
+if (isset($error["email"])) {
+    $result["error"] = ("Uncorrect email address");
+}
+
+echo json_encode($result);
+?>
