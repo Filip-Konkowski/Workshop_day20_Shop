@@ -1,10 +1,9 @@
 <?php
-
+session_start();
 require_once __DIR__ . "/vendor/autoload.php";
-include('config/db.php');
+require_once __DIR__. '/config/db.php';
 
-$db = new mysqli(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DB);
-
+$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DB);
 if ($db->connect_error) {
     die('nieudane. blad:' . $db->connect_error);
 } else {
@@ -14,7 +13,7 @@ if ($db->connect_error) {
 $router = new AltoRouter();
 $router->setBasePath(BASE_PATH);
 require_once ("routing.php");
-$match = $router->match()
+$match = $router->match();
 
 ?>
 
@@ -34,12 +33,12 @@ $match = $router->match()
 <?php
 require_once("header.php");
 if ($match == true){
-    var_dump($match);
     require_once ($match["target"]);
 }
 require_once("footer.php");
 
 ?>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
 </body>
 </html>

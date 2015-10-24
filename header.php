@@ -2,12 +2,12 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" id="E-shop" href="#">E-shop</a>
+            <a class="navbar-brand" id="E-shop" href="<?= $router->generate("viewAllItemsFile") ?>">E-shop</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li id="register"><a href="<?= DIR_PATH?>register/">Register</a></li>
+                <li id="register"><a href="<?= $router->generate("registerFile")?>">Register</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
