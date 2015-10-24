@@ -10,6 +10,7 @@ CREATE TABLE items(
         PRIMARY KEY(item_id)
 );
 
+
 */
 class Item {
 
@@ -20,6 +21,7 @@ class Item {
     public $description;
     public $quantity;
 
+
     static public function setConnection (mysqli $newConnection) {
         self::$conn = $newConnection;
     }
@@ -27,14 +29,27 @@ class Item {
     static public function addItem($newName, $newPrice, $newDescription, $newQuantity){
         $sql = "INSERT INTO items (item_name, item_price, item_description, item_quantity)
                 VALUES ('$newName', '$newPrice', '$newDescription', '$newQuantity')";
-
         $result = self::$conn->query($sql);
-
         if($result == true){
             $newItem = new Item(self::$conn->insert_id, $newName, $newPrice, $newDescription, $newQuantity );
             return $newItem;
         }
         return false;
+    }
+
+    public function addPhoto($itemId, $photoPath) {
+        $sql = "INSERT INTO photos (item_id, photo_path)
+                VALUES ('$itemId', '$photoPath')";
+        $result = self::$conn->query($sql);
+
+    }
+
+    public function __construct($newId, $newName, $newPrice, $newDescription, $newQuantity){
+        $this->id = $newId;
+        $this->setName();
+        $this->setPrice();
+        $this->setDescription();
+        $this->setQuantity();
     }
 
     public function getItemById($id){
