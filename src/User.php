@@ -13,17 +13,18 @@ CREATE TABLE users(
 
 
 class User{
-        static private $db;
 
-        protected $name;
-        protected $surname;
-        protected $mail;
-        protected $password;
-        protected $address;
+        static private $conn;
+        public $id;
+        public $name;
+        public $surname;
+        public $mail;
+        public $password;
+        public $address;
 
 
-        public static function setConnection(mysqli $newConn){
-                self:: $db = $newConn;
+        static public function setConnection (mysqli $newConnection) {
+                self::$conn = $newConnection;
         }
 
         static public function register($name, $surname, $newMail, $password, $password2, $address){
@@ -32,28 +33,23 @@ class User{
                 }
                 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-                $sql = "INSERT INTO users(user_name, user_surname, user_mail, user_password, user_address)
-                VALUES ('$name', '$surname', '$newMail', '$hashedPassword','$address')";
-
-                $result = self::$db->query($sql);
+                $sql = "INSERT INTO users(user_name, user_surname, user_email, user_password, user_address) VALUES ('$name', '$surname', '$newMail', '$hashedPassword','$address')";
+                $result = self::$conn->query($sql);
                 if($result == true){
-                        $newUser = new User(self::$db->insert_id, $name, $surname, $newMail, $address);
+                        $newUser = new User(self::$conn->insert_id, $name, $surname, $newMail, $address);
                         return $newUser;
                 }
-
+                return false;
         }
 
-        static public function logIn($mail, $password){
-                $sql = "SELECT * FROM users WHERE user_mail = '$mail'";
-                $result = self::$db->query($sql);
+        static public function login($email, $password){
+                $sql = "SELECT * FROM users WHERE user_mail = '$email'";
+                $result = self::$conn->query($sql);
 
                 if($result == true){
                         if($result->num_rows ==1){
                                 $row = $result->fetch_assoc();
-                                //var_dump($row);
-                                //echo self::$conn->error;
                                 if(password_verify($password, $row["user_password"])){
-                                        //var_dump($row);
                                         $loggedUser = new User($row['user_id'], $row['user_name'], $row['user_surname'], $row['user_mail'], $row['user_address']);
                                         return $loggedUser;
                                 }
@@ -61,4 +57,63 @@ class User{
                 }
                 return false;
         }
+
+        public function __construct($newId, $newName, $newSurname, $newEmail, $newAddress)
+        {
+                $this->id = $newId;
+                $this->setName($newName);
+                $this->setSurname($newSurname);
+                $this->setEmail($newEmail);
+                $this->setAddress($newAddress);
+        }
+        public function getId(){
+                return $this->id;
+        }
+
+        public function getName()
+        {
+                return $this->name;
+        }
+
+        public function setName($name)
+        {
+                $this->name = $name;
+        }
+
+        public function getSurname()
+        {
+                return $this->surname;
+        }
+
+        public function setSurname($surname)
+        {
+                $this->surname = $surname;
+        }
+
+        public function getEmail()
+        {
+                return $this->mail;
+        }
+
+        public function setEmail($mail)
+        {
+                $this->mail = $mail;
+        }
+
+        public function getPassword()
+        {
+                return $this->password;
+        }
+
+        public function getAddress()
+        {
+                return $this->address;
+        }
+
+        public function setAddress($address)
+        {
+                $this->address = $address;
+        }
+
 }
+
