@@ -21,7 +21,7 @@
             <ul class="nav navbar-nav">
                 <li id="register"><a href="<?= $router->generate("registerFile")?>">Register</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search" method="POST" action="<?php //$router->generate("") ?>">
+            <form class="navbar-form navbar-left" role="search" method="POST" action="">
                 <div class="form-group">
                     <input type="text" class="form-control" id="email" name="email" placeholder="email">
                 </div>
