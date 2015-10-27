@@ -2,7 +2,6 @@
 
 require_once( __DIR__ . '/src/User.php');
 
-
 if($_SERVER["REQUEST_METHOD"] === "POST") {
     $error = "";
     User::setConnection($db);

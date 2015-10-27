@@ -13,14 +13,13 @@ $router->setBasePath(BASE_PATH);
 require_once ("routing.php");
 $match = $router->match();
 
-
-
+require_once("header.php");
 if ($match["target"] == "loggedUserHtml.php"){
     require_once ($match["target"]);
 }
 
 else {
-    require_once("header.php");
+//    require_once("header.php");
     if ($match) {
         require_once($match["target"]);
     }
@@ -30,4 +29,5 @@ else {
     require_once("footer.php");
 }
 
+var_dump($_SESSION["user"]);
 ?>
