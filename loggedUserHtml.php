@@ -5,7 +5,6 @@ if (isset($_SESSION["user"]) == false) {
 }
 
 $user = $_SESSION["user"];
-var_dump(get_object_vars($user));
 $arrayUser = get_object_vars($user);
 
 ?>
