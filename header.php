@@ -21,12 +21,12 @@
             <ul class="nav navbar-nav">
                 <li id="register"><a href="<?= $router->generate("registerFile")?>">Register</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" method="POST" action="<?php //$router->generate("") ?>">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="email" placeholder="email">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="email">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="password" placeholder="password">
+                    <input type="text" class="form-control" id="password" name="password" placeholder="password">
                 </div>
                 <button type="submit" class="btn btn-default" id="login">Login</button>
             </form>

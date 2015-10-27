@@ -32,7 +32,6 @@ $match = $router->match();
 //    }
 //}
 
-
 require_once("header.php");
 if ($match == true){
     require_once ($match["target"]);
