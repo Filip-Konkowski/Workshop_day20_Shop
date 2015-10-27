@@ -50,7 +50,7 @@ class User{
                         if($result->num_rows == 1){
                                 $row = $result->fetch_assoc();
                                 if(password_verify($password, $row["user_password"])){
-                                        $loggedUser = new User($row['user_id'], $row['user_name'], $row['user_surname'], $row['user_mail'], $row['user_address']);
+                                        $loggedUser = new User($row['user_id'], $row['user_name'], $row['user_surname'], $row['user_email'], $row['user_address']);
                                         return $loggedUser;
                                 }
                         }
