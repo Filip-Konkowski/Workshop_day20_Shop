@@ -1,4 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>E-shop</title>
+    <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+    <link href="<?= DIR_PATH ?>css/css_bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= DIR_PATH ?>css/custom.css" rel="stylesheet">
+</head>
+<body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
