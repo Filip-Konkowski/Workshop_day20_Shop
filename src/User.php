@@ -4,7 +4,7 @@ CREATE TABLE users(
         user_id INT AUTO_INCREMENT,
         user_name VARCHAR(30),
         user_surname VARCHAR(30),
-        user_email VARCHAR(30),
+        user_email VARCHAR(30) UNIQUE,
         user_password VARCHAR(60),
         user_address VARCHAR(60),
         PRIMARY KEY(user_id)
@@ -43,11 +43,11 @@ class User{
         }
 
         static public function login($email, $password){
-                $sql = "SELECT * FROM users WHERE user_mail = '$email'";
+                $sql = "SELECT * FROM users WHERE user_email='$email'";
                 $result = self::$conn->query($sql);
 
                 if($result == true){
-                        if($result->num_rows ==1){
+                        if($result->num_rows == 1){
                                 $row = $result->fetch_assoc();
                                 if(password_verify($password, $row["user_password"])){
                                         $loggedUser = new User($row['user_id'], $row['user_name'], $row['user_surname'], $row['user_mail'], $row['user_address']);
