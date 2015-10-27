@@ -21,7 +21,11 @@
             <ul class="nav navbar-nav">
                 <li id="register"><a href="<?= $router->generate("registerFile")?>">Register</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search" method="POST" action="">
+            <?php
+
+            if($_SESSION["user"] != false) {
+
+                echo '<form class="navbar-form navbar-left" role="search" method="POST" action="">
                 <div class="form-group">
                     <input type="text" class="form-control" id="email" name="email" placeholder="email">
                 </div>
@@ -29,7 +33,16 @@
                     <input type="text" class="form-control" id="password" name="password" placeholder="password">
                 </div>
                 <button type="submit" class="btn btn-default" id="login">Login</button>
-            </form>
+            </form>';
+            }
+            else {
+                echo '<ul class="nav navbar-nav">
+                <li id="userPanel"><a href="'.$router->generate("panelUser").'">Panel User</a></li>
+                </ul>';
+            }
+
+            ?>
+
         </div>
     </div>
 </nav>
